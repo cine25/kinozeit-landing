@@ -1,11 +1,19 @@
-# Kinozeit Landing
+# kinozeit – Landing
 
-Statisches Portal für Plex & Co. – deploy mit **Cloudflare Pages**.
+Eine minimalistische, schnelle Landing-Page mit Fokus auf **Discord**.
 
-## Links anpassen
-Öffne `index.html` und ändere die URLs der Buttons (Plex, Overseerr, Jellyfin, Discord).
+- Logo klick → öffnet den Discord-Invite
+- Große CTA „Discord beitreten“
+- Links zu Plex, Wunschliste, Jellyfin
+- Cleanes, apple-ähnliches, zeitloses Design
 
 ## Deploy
-1. Repo auf GitHub pushen
-2. In Cloudflare → Pages → Connect to Git → Repo auswählen → Branch `main`.
-3. Nach dem ersten Deploy kannst du eine Custom Domain (z. B. `kinozeit.org`) verbinden.
+
+**Cloudflare Pages**
+1. Neues Projekt → „Mit Git verbinden“ → dieses Repo wählen.
+2. Build: *None*, Framework *None*, Output: `/`.
+3. Als Custom Domain `kinozeit.org` verbinden.
+
+**GitHub Pages (Alternative)**
+1. Settings → Pages → Source: `GitHub Actions` oder `main / root`.
+2. Warten, bis die Site online ist.
