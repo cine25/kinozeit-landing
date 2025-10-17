@@ -1,42 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KINOZEIT HQ</title>
-  <meta name="description" content="KINOZEIT HQ – Private Media Hub">
-  <link rel="icon" href="assets/logo.png" type="image/png">
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="KINOZEIT – zeitloses Streaming-Portal." />
+  <link rel="icon" href="assets/logo.png" />
+  <link rel="preload" as="image" href="assets/logo.png">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <canvas id="fx-canvas" aria-hidden="true"></canvas>
+  <!-- BACKDROP: gentle liquid gradients -->
+  <div class="bg-gradient"></div>
+  <canvas id="embers" aria-hidden="true"></canvas>
 
-  <!-- Top glass bar -->
-  <header class="glass nav">
-    <div class="hq glass">HQ</div>
-    <div class="brand-center">
-      <img src="assets/logo.png" alt="KINOZEIT HQ Logo">
+  <!-- TOP BAR (Liquid Glass) -->
+  <header class="glass topbar">
+    <div class="left">
+      <a class="brand" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener">
+        <img src="assets/logo.png" alt="Kinozeit Logo" class="brand-logo" />
+        <span class="brand-text">KINOZEIT</span>
+      </a>
+      <span class="chip glass-engraved">HQ</span>
     </div>
-    <nav class="menu">
-      <a class="chip" href="https://plex.kinozeit.org/" target="_blank" rel="noopener">Plex</a>
-      <a class="chip" href="https://wunschliste.kinozeit.org/" target="_blank" rel="noopener">Wunschliste</a>
+    <nav class="right">
+      <a class="navlink glass-pill" href="https://plex.kinozeit.org" target="_blank" rel="noopener">Plex</a>
+      <a class="navlink glass-pill" href="https://wunschliste.kinozeit.org" target="_blank" rel="noopener">Wunschliste</a>
     </nav>
+    <div class="sheen"></div>
   </header>
 
-  <main class="stage">
-    <h1 class="wordmark">KINOZEIT</h1>
-    <a class="cta glass" id="discord" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener" aria-label="Discord beitreten">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M20.317 4.369A18.1 18.1 0 0 0 16.558 3l-.177.322a16.2 16.2 0 0 1 3.212 1.588c-3.042-1.458-6.221-1.458-9.244 0 .36-.21.735-.41 1.126-.588A18.2 18.2 0 0 0 7.64 3.322 18.1 18.1 0 0 0 3.88 4.37C1.22 8.33.28 12.15.57 15.918c1.628 1.202 3.21 1.933 4.747 2.403l.839-1.34c-.46-.175-.9-.38-1.318-.613.254.188.513.364.776.53 3.064 1.756 6.446 1.756 9.49 0 .264-.166.523-.342.776-.53-.418.233-.858.438-1.318.613l.84 1.34c1.536-.47 3.118-1.2 4.746-2.403.39-4.892-.66-8.68-3.641-11.549Z" fill="currentColor"/>
-        <circle cx="9" cy="12" r="1.1" fill="#0A0A0A"/>
-        <circle cx="15" cy="12" r="1.1" fill="#0A0A0A"/>
-      </svg>
-      Discord
+  <!-- CENTER HERO -->
+  <main class="hero">
+    <h1 class="hero-title" aria-label="KINOZEIT">
+      <span class="glass-title">KINOZEIT</span>
+    </h1>
+    <p class="subtle">Zeitlos. Ruhig. Gläsern.</p>
+
+    <!-- Discord CTA, slightly below the title so it doesn't cut text -->
+    <a class="discord-cta glass-cta" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener" title="Discord beitreten">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369A19.791 19.791 0 0 0 16.558 3c-.184.331-.393.78-.537 1.136a18.27 18.27 0 0 0-4.042 0A7.02 7.02 0 0 0 11.442 3c-1.33.246-2.61.626-3.76 1.136C4.167 7.346 3.3 10.18 3.6 12.965c1.58 1.186 3.104 1.91 4.636 2.382.372-.516.706-1.066.997-1.645-.547-.204-1.07-.454-1.57-.743.132-.096.262-.197.39-.303 3.03 1.415 6.32 1.415 9.32 0 .128.106.258.207.39.303-.5.289-1.023.539-1.57.743.29.579.625 1.129.997 1.645 1.532-.472 3.056-1.196 4.636-2.382.381-3.572-.648-6.37-2.112-8.596ZM9.681 12.674c-.904 0-1.64-.846-1.64-1.888s.73-1.888 1.64-1.888c.91 0 1.646.846 1.64 1.888 0 1.042-.73 1.888-1.64 1.888Zm4.638 0c-.904 0-1.64-.846-1.64-1.888s.73-1.888 1.64-1.888c.91 0 1.646.846 1.64 1.888 0 1.042-.73 1.888-1.64 1.888Z" fill="currentColor"/></svg>
+      <span>Discord</span>
     </a>
   </main>
 
-  <footer class="glass footer">
-    <div class="copyright">© 2025 KINOZEIT HQ</div>
+  <!-- BOTTOM BAR -->
+  <footer class="glass bottombar">
+    <div class="footer-center">© 2025 KINOZEIT<span class="thin">HQ</span></div>
   </footer>
 
   <script src="script.js"></script>
