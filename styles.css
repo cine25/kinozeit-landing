@@ -1,0 +1,38 @@
+/* Kinozeit Landing • minimal dark */
+:root{
+  --bg:#0b0c10; --panel:#14161d; --muted:#9aa3b2; --text:#e9eef6; --brand:#ffb000;
+  --border:rgba(255,255,255,.08);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:radial-gradient(1200px 600px at 10% -10%,rgba(255,186,0,.16),transparent 60%),
+  radial-gradient(1200px 600px at 110% 110%,rgba(255,122,0,.12),transparent 60%), var(--bg);
+  color:var(--text); font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+}
+.wrap{max-width:1100px; margin:0 auto; padding:32px 20px 60px}
+.header{display:flex; align-items:center; justify-content:space-between; margin:8px 0 22px}
+.logo{display:flex; gap:14px; align-items:center}
+.logo svg{width:54px; height:54px; filter: drop-shadow(0 6px 24px rgba(255,160,0,.2));}
+.brand h1{font-size:28px; margin:0; letter-spacing:.2px}
+.brand .tag{margin:0; color:var(--muted)}
+.grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px}
+.card{
+  display:block; padding:18px 18px 20px; border:1px solid var(--border);
+  background:linear-gradient(180deg, rgba(255,186,0,.06), transparent 25%), var(--panel);
+  border-radius:16px; text-decoration:none; color:var(--text);
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.card:hover{transform:translateY(-2px); box-shadow:0 10px 36px rgba(0,0,0,.35); border-color:rgba(255,186,0,.2)}
+.card-ico{font-size:28px}
+.card h2{margin:6px 0 6px; font-size:20px}
+.card p{margin:0; color:var(--muted)}
+
+.panel{
+  margin-top:22px; padding:18px 18px; border:1px solid var(--border); border-radius:16px; background:var(--panel);
+}
+.panel h3{margin:0 0 8px 0}
+.panel ol{margin:0 0 0 18px; padding:0}
+
+.footer{margin-top:26px; color:var(--muted); text-align:center; font-size:14px}
+@media (max-width:520px){ .brand h1{font-size:22px} }

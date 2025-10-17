@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Kinozeit • Home</title>
+  <meta name="description" content="Kinozeit • Plex & Friends">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="header">
+      <div class="logo">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1">
+              <stop offset="0" stop-color="#ffcc00"/><stop offset="1" stop-color="#ff7a00"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="30" fill="url(#g)" opacity=".25"/>
+          <path d="M22 16l20 16-20 16V16z" fill="url(#g)"/>
+        </svg>
+        <div class="brand">
+          <h1>Kinozeit</h1>
+          <p class="tag">Private Streaming Hub</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid">
+      <a class="card" href="https://plex.kinozeit.org" target="_blank" rel="noopener">
+        <div class="card-ico">🎬</div>
+        <h2>Plex Web</h2>
+        <p>Direktzugang zur Mediathek</p>
+      </a>
+
+      <a class="card" href="https://wunschliste.kinozeit.org" target="_blank" rel="noopener">
+        <div class="card-ico">🎥</div>
+        <h2>Overseerr</h2>
+        <p>Filme & Serien wünschen</p>
+      </a>
+
+      <a class="card" href="https://jelly.kinozeit.org" target="_blank" rel="noopener">
+        <div class="card-ico">🍇</div>
+        <h2>Jellyfin</h2>
+        <p>Alternativer Player (Beta)</p>
+      </a>
+
+      <a class="card" href="https://discord.gg/placeholder" target="_blank" rel="noopener">
+        <div class="card-ico">💬</div>
+        <h2>Discord</h2>
+        <p>Support & News</p>
+      </a>
+    </section>
+
+    <section class="panel">
+      <h3>Schnellstart</h3>
+      <ol>
+        <li>Plex-Account anlegen und freischalten lassen</li>
+        <li>In den Apps <em>plex.kinozeit.org</em> als Server nutzen</li>
+        <li>Wünsche über <strong>Overseerr</strong> einreichen</li>
+      </ol>
+    </section>
+
+    <footer class="footer">
+      <p>© <span id="y"></span> Kinozeit — rein privat · non-commercial</p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
