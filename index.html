@@ -1,54 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KINOZEIT HQ</title>
-  <meta name="description" content="KINOZEIT – zeitloses Streaming-Portal." />
-  <link rel="icon" href="assets/logo.png" />
-  <link rel="preload" as="image" href="assets/logo.png">
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <!-- BACKDROP: gentle liquid gradients -->
-  <div class="bg-gradient"></div>
-  <canvas id="embers" aria-hidden="true"></canvas>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>KINOZEIT</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <meta name="description" content="KINOZEIT — Stream. Speed. Quality." />
+  </head>
+  <body>
+    <div class="scene">
+      <!-- TOP GLASS BAR (full width) -->
+      <header class="glass-bar top">
+        <div class="bar-inner">
+          <div class="left">
+            <span class="hq-pill">HQ</span>
+            <a class="brand" href="#">
+              <img class="brand-logo" src="assets/kinozeit.png" alt="Kinozeit Logo" />
+              <span class="brand-name">KINOZEIT</span>
+            </a>
+          </div>
+          <nav class="right">
+            <a class="nav-link" href="https://plex.kinozeit.org/web" target="_blank" rel="noopener">Plex</a>
+            <a class="nav-link" href="https://wunschliste.kinozeit.org/" target="_blank" rel="noopener">Wunschliste</a>
+          </nav>
+        </div>
+      </header>
 
-  <!-- TOP BAR (Liquid Glass) -->
-  <header class="glass topbar">
-    <div class="left">
-      <a class="brand" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener">
-        <img src="assets/logo.png" alt="Kinozeit Logo" class="brand-logo" />
-        <span class="brand-text">KINOZEIT</span>
-      </a>
-      <span class="chip glass-engraved">HQ</span>
+      <!-- CENTER HERO -->
+      <main class="hero">
+        <h1 class="title" aria-label="KINOZEIT">
+          <span class="glass-word">KINOZEIT</span>
+        </h1>
+
+        <p class="tagline">STREAM. SPEED. QUALITY.</p>
+
+        <a class="cta-glass" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener" aria-label="Discord Einladung">
+          <span>Discord</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M13 5l7 7-7 7M5 12h14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </main>
+
+      <!-- AMBIENT GLOW / EMBERS -->
+      <div class="glow glow-left" aria-hidden="true"></div>
+      <div class="glow glow-right" aria-hidden="true"></div>
+      <div class="embers" aria-hidden="true"></div>
+
+      <!-- BOTTOM GLASS BAR (full width) -->
+      <footer class="glass-bar bottom">
+        <div class="bar-inner">
+          <div class="foot-left">
+            <span class="foot-small">2025 KINOZEITHQ</span>
+          </div>
+          <div class="foot-right">
+            <span class="foot-small muted">—</span>
+          </div>
+        </div>
+      </footer>
     </div>
-    <nav class="right">
-      <a class="navlink glass-pill" href="https://plex.kinozeit.org" target="_blank" rel="noopener">Plex</a>
-      <a class="navlink glass-pill" href="https://wunschliste.kinozeit.org" target="_blank" rel="noopener">Wunschliste</a>
-    </nav>
-    <div class="sheen"></div>
-  </header>
 
-  <!-- CENTER HERO -->
-  <main class="hero">
-    <h1 class="hero-title" aria-label="KINOZEIT">
-      <span class="glass-title">KINOZEIT</span>
-    </h1>
-    <p class="subtle">Zeitlos. Ruhig. Gläsern.</p>
-
-    <!-- Discord CTA, slightly below the title so it doesn't cut text -->
-    <a class="discord-cta glass-cta" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener" title="Discord beitreten">
-      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369A19.791 19.791 0 0 0 16.558 3c-.184.331-.393.78-.537 1.136a18.27 18.27 0 0 0-4.042 0A7.02 7.02 0 0 0 11.442 3c-1.33.246-2.61.626-3.76 1.136C4.167 7.346 3.3 10.18 3.6 12.965c1.58 1.186 3.104 1.91 4.636 2.382.372-.516.706-1.066.997-1.645-.547-.204-1.07-.454-1.57-.743.132-.096.262-.197.39-.303 3.03 1.415 6.32 1.415 9.32 0 .128.106.258.207.39.303-.5.289-1.023.539-1.57.743.29.579.625 1.129.997 1.645 1.532-.472 3.056-1.196 4.636-2.382.381-3.572-.648-6.37-2.112-8.596ZM9.681 12.674c-.904 0-1.64-.846-1.64-1.888s.73-1.888 1.64-1.888c.91 0 1.646.846 1.64 1.888 0 1.042-.73 1.888-1.64 1.888Zm4.638 0c-.904 0-1.64-.846-1.64-1.888s.73-1.888 1.64-1.888c.91 0 1.646.846 1.64 1.888 0 1.042-.73 1.888-1.64 1.888Z" fill="currentColor"/></svg>
-      <span>Discord</span>
-    </a>
-  </main>
-
-  <!-- BOTTOM BAR -->
-  <footer class="glass bottombar">
-    <div class="footer-center">© 2025 KINOZEIT<span class="thin">HQ</span></div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

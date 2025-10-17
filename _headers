@@ -1,11 +1,8 @@
+/* Cloudflare / Netlify style headers (optional) */
 /*
-  X-Content-Type-Options: nosniff
-  X-Frame-Options: DENY
-  Referrer-Policy: strict-origin-when-cross-origin
-  Cache-Control: public, max-age=31536000, immutable
-
-/index.html
-  Cache-Control: no-cache
-
-/assets/*
-  Cache-Control: public, max-age=31536000, immutable
+  /
+    Cache-Control: public, max-age=600
+    X-Frame-Options: SAMEORIGIN
+    X-Content-Type-Options: nosniff
+    Referrer-Policy: strict-origin-when-cross-origin
+*/
