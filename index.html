@@ -1,42 +1,56 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KINOZEIT</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="preload" href="assets/kinozeit.png" as="image">
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="KINOZEIT HQ – Plex, Overseerr & Discord" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <div class="stage">
-    <header class="glass-bar top">
-      <a class="logo-card" href="https://discord.gg/yxJ7N49Gx7" aria-label="Discord öffnen">
-        <img src="assets/kinozeit.png" alt="Kinozeit HQ" />
-      </a>
-      <nav class="nav">
-        <a class="chip" href="https://plex.kinozeit.org/">Plex</a>
-        <a class="chip" href="https://wunschliste.kinozeit.org/">Overseerr</a>
-      </nav>
-    </header>
-
-    <main class="hero">
-      <h1>KINOZEIT</h1>
-      <a class="cta" href="https://discord.gg/yxJ7N49Gx7">
-        <span class="ico">🎮</span> Discord beitreten
-      </a>
-      <div class="links">
-        <a class="pill" href="https://plex.kinozeit.org/">Plex Web</a>
-        <a class="pill" href="https://wunschliste.kinozeit.org/">Wunschliste</a>
-      </div>
-    </main>
-
-    <footer class="glass-bar bottom">
-      <div class="copy">© 2025 KINOZEIT HQ</div>
-    </footer>
-  </div>
-
+  <!-- Decorative background -->
   <canvas id="bg" aria-hidden="true"></canvas>
-  <script src="script.js"></script>
+
+  <!-- Top Glass Bar -->
+  <header class="glass topbar noselect">
+    <a class="brand" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener">
+      <img src="./assets/kinozeit.png" alt="KINOZEIT HQ" />
+      <span>KINOZEIT</span>
+    </a>
+    <nav class="navlinks">
+      <a class="chip" href="https://plex.kinozeit.org" target="_blank" rel="noopener">Plex</a>
+      <a class="chip" href="https://wunschliste.kinozeit.org" target="_blank" rel="noopener">Overseerr</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main class="stage">
+    <h1 class="title noselect"><span class="glass-text">KINOZEIT</span></h1>
+
+    <div class="cta-row">
+      <a class="btn-glass primary" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener" aria-label="Discord beitreten">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="ico">
+          <path d="M19.54 5.34a16.3 16.3 0 0 0-4.02-1.24.06.06 0 0 0-.06.03c-.17.3-.36.7-.5 1.02a15.2 15.2 0 0 0-4.9 0c-.14-.33-.33-.72-.5-1.02a.06.06 0 0 0-.06-.03 16.3 16.3 0 0 0-4.02 1.24.05.05 0 0 0-.02.02C3.02 9 2.32 12.53 2.58 16.03c0 .03.02.05.05.06a16.6 16.6 0 0 0 4.96 1.62.06.06 0 0 0 .06-.03c.38-.52.72-1.07 1.02-1.65a.06.06 0 0 0-.03-.08c-.54-.2-1.06-.46-1.55-.77a.06.06 0 0 1 0-.1c.1-.07.22-.15.32-.22.02-.02.05-.02.07-.01 3.25 1.49 6.77 1.49 9.98 0 .02-.01.05-.01.07.01.1.08.21.15.32.22a.06.06 0 0 1 0 .1c-.49.31-1.01.57-1.55.77a.06.06 0 0 0-.03.08c.3.58.64 1.13 1.02 1.65.02.03.05.04.08.03a16.6 16.6 0 0 0 4.96-1.62.06.06 0 0 0 .05-.06c.4-5.02-.67-8.51-2.86-10.67 0 0-.01-.02-.03-.02zM9.53 14.44c-.97 0-1.76-.89-1.76-1.99 0-1.1.78-1.99 1.76-1.99s1.77.9 1.76 1.99c0 1.1-.79 1.99-1.76 1.99zm4.93 0c-.97 0-1.76-.89-1.76-1.99 0-1.1.78-1.99 1.76-1.99s1.76.9 1.76 1.99c0 1.1-.79 1.99-1.76 1.99z"/>
+        </svg>
+        <span>Discord beitreten</span>
+      </a>
+      <div class="spacer"></div>
+      <a class="btn-glass" href="https://plex.kinozeit.org" target="_blank" rel="noopener">Plex&nbsp;Web</a>
+      <a class="btn-glass" href="https://wunschliste.kinozeit.org" target="_blank" rel="noopener">Wunschliste</a>
+    </div>
+  </main>
+
+  <!-- Bottom Glass Bar -->
+  <footer class="glass bottombar noselect">
+    <small>© 2025 KINOZEIT HQ</small>
+    <div class="dots" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
 </body>
 </html>

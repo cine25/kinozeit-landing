@@ -1,32 +1,49 @@
-// Soft, animated blobs in background (no scroll assumed).
-const c = document.getElementById('bg');
-const ctx = c.getContext('2d');
-function resize(){ c.width = innerWidth; c.height = innerHeight; }
-addEventListener('resize', resize, {passive:true}); resize();
+// Soft animated blobs on the background canvas
+const cvs = document.getElementById('bg');
+const ctx = cvs.getContext('2d');
+let w, h, t = 0;
+const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
 
-const blobs = Array.from({length: 5}).map((_,i)=> ({
-  x: Math.random()*c.width,
-  y: Math.random()*c.height,
-  r: 220 + Math.random()*220,
-  hue: [12, 280, 210, 160, 320][i%5],
-  vx: (Math.random()*2-1)*0.25,
-  vy: (Math.random()*2-1)*0.25,
+function resize(){
+  w = cvs.width = Math.floor(window.innerWidth * dpr);
+  h = cvs.height = Math.floor(window.innerHeight * dpr);
+  cvs.style.width = window.innerWidth + 'px';
+  cvs.style.height = window.innerHeight + 'px';
+}
+window.addEventListener('resize', resize, { passive:true });
+resize();
+
+function rnd(a,b){ return a + Math.random()*(b-a); }
+
+const blobs = Array.from({length: 6}).map(() => ({
+  x: rnd(0.1, 0.9),
+  y: rnd(0.1, 0.9),
+  r: rnd(120, 300),
+  speed: rnd(0.2, 0.6),
+  hue: rnd(200, 340),
+  alpha: rnd(0.08, 0.16)
 }));
 
-function tick(){
-  ctx.clearRect(0,0,c.width,c.height);
-  blobs.forEach(b=>{
-    b.x+=b.vx; b.y+=b.vy;
-    if(b.x< -200 || b.x> c.width+200) b.vx*=-1;
-    if(b.y< -200 || b.y> c.height+200) b.vy*=-1;
-    const grad = ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r);
-    grad.addColorStop(0, `hsla(${b.hue} 90% 60% / .25)`);
-    grad.addColorStop(1, `hsla(${b.hue} 90% 60% / 0)`);
-    ctx.fillStyle = grad;
+function frame(ts){
+  t = ts * 0.001;
+  ctx.clearRect(0,0,w,h);
+  ctx.globalCompositeOperation = 'lighter';
+
+  blobs.forEach((b, i) => {
+    const x = (b.x + Math.sin(t * b.speed + i)*0.03) * w;
+    const y = (b.y + Math.cos(t * b.speed + i)*0.03) * h;
+    const r = b.r * dpr;
+
+    const grd = ctx.createRadialGradient(x, y, 0, x, y, r);
+    grd.addColorStop(0, `hsla(${b.hue}, 100%, 60%, ${b.alpha})`);
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
     ctx.beginPath();
-    ctx.arc(b.x,b.y,b.r,0,Math.PI*2);
+    ctx.arc(x, y, r, 0, Math.PI*2);
     ctx.fill();
   });
-  requestAnimationFrame(tick);
+
+  ctx.globalCompositeOperation = 'source-over';
+  requestAnimationFrame(frame);
 }
-tick();
+requestAnimationFrame(frame);

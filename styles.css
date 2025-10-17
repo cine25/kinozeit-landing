@@ -1,130 +1,161 @@
-/* Reset & base */
-* { box-sizing: border-box; }
-html, body { height: 100%; }
-html { overflow: hidden; }            /* <- no scroll */
-body {
-  margin: 0;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  color: #e9ecf1;
-  background: #0b0e12;
+/* KINOZEIT Liquid Glass — v1 */
+:root{
+  --bg:#0b0e13;
+  --glass:#12151b80; /* translucent */
+  --glass-strong:#1a1f2780;
+  --stroke: #ffffff1a;
+  --text: #e8ebf2;
+  --muted:#b8c0cf;
+  --accent:#9b8cff;
+  --accent-2:#ff6ea9;
+  --radius: 22px;
+  --blur: 18px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color:var(--text);
+  background: radial-gradient(1200px 800px at 20% 15%, #ff4d1a1f, transparent),
+             radial-gradient(1000px 700px at 85% 15%, #2563ff24, transparent),
+             radial-gradient(1200px 900px at 50% 85%, #b829ff1c, transparent),
+             var(--bg);
+  overflow:hidden; /* no scroll */
 }
 
-/* stage fills viewport and blocks scroll */
-.stage {
-  position: relative;
-  width: 100vw;
-  height: 100vh;                      /* lock to viewport height */
-  overflow: hidden;
-  display: grid;
-  grid-template-rows: 72px 1fr 72px;  /* header / content / footer */
+.noselect{ user-select:none }
+
+/* Background canvas layers */
+#bg{
+  position:fixed; inset:0; width:100%; height:100%;
+  z-index:-1;
 }
 
-/* liquid glass bars (top & bottom are identical height now) */
-.glass-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 10px 16px;
-  margin: 10px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.12);
-}
-.glass-bar.bottom { justify-content: center; }
-
-/* removed the inner progress stripe that was previously here */
-
-/* logo card as glass tile */
-.logo-card {
-  display: inline-flex;
-  padding: 8px;
-  border-radius: 16px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255,255,255,0.22);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.25);
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-.logo-card img {
-  width: 220px;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 12px;
-  display: block;
-  filter: drop-shadow(0 8px 24px rgba(255,128,64,0.35));
-}
-.logo-card:hover { transform: translateY(-2px); }
-
-.nav { display: flex; gap: 12px; }
-.chip {
-  color: #d9e2ef;
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.18);
+/* Glass primitives */
+.glass{
+  background: linear-gradient(180deg, var(--glass), var(--glass-strong));
+  border:1px solid var(--stroke);
+  backdrop-filter: blur(var(--blur)) saturate(120%);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(120%);
+  box-shadow:
+    0 1px 0 #ffffff0d inset,
+    0 18px 50px #00000061,
+    0 4px 16px #00000066;
+  border-radius: var(--radius);
 }
 
-/* hero */
-.hero {
-  position: relative;
-  display: grid;
-  place-items: center;
-  gap: 22px;
-  padding-inline: 24px;
+.topbar, .bottombar{
+  position: fixed;
+  left: 12px; right: 12px;
+  height: 74px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 10px 14px;
 }
-.hero h1 {
+.topbar{ top:10px; }
+.bottombar{ bottom:10px; }
+
+.brand{
+  display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--text);
+  padding:8px 10px; border-radius:14px;
+}
+.brand img{
+  width:56px; height:56px; object-fit:cover; border-radius:15px;
+  border:1px solid var(--stroke);
+  box-shadow: 0 8px 20px #00000055, 0 0 0 6px #ffffff07 inset;
+}
+.brand span{
+  letter-spacing: 0.12em;
+  font-weight:800; font-size:18px; opacity:.92;
+}
+
+.navlinks{ display:flex; align-items:center; gap:10px; }
+.chip{
+  text-decoration:none; color:var(--text);
+  background: linear-gradient(180deg, #ffffff0a, #00000022);
+  border:1px solid var(--stroke); padding:10px 16px;
+  border-radius:14px; font-weight:600; letter-spacing:.02em;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.chip:hover{ transform:translateY(-1px); box-shadow:0 6px 16px #00000055; background:linear-gradient(180deg,#ffffff12,#00000033); }
+
+/* Stage / hero */
+.stage{
+  height:100vh; width:100vw;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding: 120px 20px 110px; /* make room for bars */
+  gap:28px;
+}
+
+.title{
   margin: 0;
   font-weight: 800;
-  font-size: clamp(56px, 12vw, 180px);
-  letter-spacing: .04em;
-  color: rgba(255,255,255,0.92);
-  text-shadow:
-    0 2px 0 rgba(255,255,255,0.06),
-    0 18px 50px rgba(0,0,0,0.85);
+  font-size: clamp(48px, 12vw, 168px);
+  line-height: .9;
+  letter-spacing:.06em;
+  text-align:center;
+}
+/* glossy, glassy text */
+.glass-text{
+  display:inline-block;
+  padding-inline: 10px;
+  background: linear-gradient(180deg, #fff, #dfe7ff 55%, #a0acc7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 16px 30px #00000066);
+  position: relative;
+}
+.glass-text::after{
+  content:"";
+  position:absolute; inset:-6px -12px;
+  border-radius: 28px;
+  background: linear-gradient(180deg, #ffffff0f, #0000000f);
+  border: 1px solid #ffffff10;
+  /* super subtle glass outline behind the text */
+  z-index:-1;
+  pointer-events:none;
 }
 
-/* primary CTA */
-.cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 22px;
-  border-radius: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  color: #120601;
-  background: linear-gradient(180deg, #ff9a5e, #ff7435);
-  box-shadow: 0 14px 30px rgba(255,122,72,0.35);
-  border: 1px solid rgba(255,255,255,0.25);
-  transition: transform .15s ease, box-shadow .15s ease;
-}
-.cta:hover { transform: translateY(-1px); box-shadow: 0 18px 40px rgba(255,122,72,0.45); }
-.ico { filter: drop-shadow(0 1px 0 rgba(255,255,255,.35)); }
+/* Buttons */
+.cta-row{ display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap; }
 
-.links { display:flex; gap:16px; }
-.pill {
-  text-decoration: none;
-  color: #e6ebf3;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.18);
-  padding: 12px 18px;
-  border-radius: 12px;
+.btn-glass{
+  --padY: 14px; --padX: 20px;
+  display:inline-flex; align-items:center; gap:10px;
+  padding: var(--padY) var(--padX);
+  color:var(--text); text-decoration:none; font-weight:700;
+  border-radius: 16px;
+  border:1px solid var(--stroke);
+  background: linear-gradient(180deg, #ffffff0a, #00000024);
+  backdrop-filter: blur(calc(var(--blur) * .65)) saturate(120%);
+  -webkit-backdrop-filter: blur(calc(var(--blur) * .65)) saturate(120%);
+  box-shadow:
+    0 1px 0 #ffffff10 inset,
+    0 14px 34px #00000055;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn-glass .ico{ width:20px; height:20px; fill: currentColor; opacity:.9 }
+.btn-glass:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 38px #00000066, 0 0 0 6px #ffffff0a inset;
+  background: linear-gradient(180deg, #ffffff12, #00000033);
+}
+.btn-glass.primary{
+  /* subtle accent ring */
+  box-shadow: 0 18px 38px #00000066, 0 0 0 1px #b9a8ff55 inset, 0 0 0 8px #b9a8ff0f inset;
 }
 
-/* canvas background */
-#bg {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-.copy { opacity: .85; font-size: 14px; }
-@media (max-width: 860px) {
-  .logo-card img{ width:140px; height:140px; }
-  .nav{ gap:8px; }
+/* Footer dots for life */
+.dots{ display:flex; gap:10px; align-items:center; }
+.dots span{ width:6px; height:6px; border-radius:50%; background:#ffffff2e; animation: pulse 2.8s infinite ease-in-out; }
+.dots span:nth-child(2){ animation-delay:.25s; }
+.dots span:nth-child(3){ animation-delay:.5s; }
+@keyframes pulse{ 0%,100%{ opacity:.4; transform:scale(1)} 50%{ opacity:1; transform:scale(1.3)} }
+
+/* small screens */
+@media (max-width: 640px){
+  .brand span{ display:none } /* keep ultra clean */
+  .brand img{ width:48px; height:48px; border-radius:12px; }
+  .topbar, .bottombar{ height:68px }
 }
