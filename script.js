@@ -1,49 +1,50 @@
-// Soft animated blobs on the background canvas
-const cvs = document.getElementById('bg');
-const ctx = cvs.getContext('2d');
-let w, h, t = 0;
-const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+// Monochrome soft moving blobs for subtle depth
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d', { alpha: true });
 
+let dpr = window.devicePixelRatio || 1;
 function resize(){
-  w = cvs.width = Math.floor(window.innerWidth * dpr);
-  h = cvs.height = Math.floor(window.innerHeight * dpr);
-  cvs.style.width = window.innerWidth + 'px';
-  cvs.style.height = window.innerHeight + 'px';
+  canvas.width = Math.floor(innerWidth * dpr);
+  canvas.height = Math.floor(innerHeight * dpr);
 }
-window.addEventListener('resize', resize, { passive:true });
 resize();
+addEventListener('resize', resize);
 
-function rnd(a,b){ return a + Math.random()*(b-a); }
-
-const blobs = Array.from({length: 6}).map(() => ({
-  x: rnd(0.1, 0.9),
-  y: rnd(0.1, 0.9),
-  r: rnd(120, 300),
-  speed: rnd(0.2, 0.6),
-  hue: rnd(200, 340),
-  alpha: rnd(0.08, 0.16)
+const blobs = Array.from({length: 6}).map((_,i)=> ({
+  x: Math.random()*innerWidth,
+  y: Math.random()*innerHeight,
+  r: 160 + Math.random()*200,
+  dx: (Math.random()*.6+.2) * (Math.random()<.5?-1:1),
+  dy: (Math.random()*.6+.2) * (Math.random()<.5?-1:1),
+  c: i%2
 }));
 
-function frame(ts){
-  t = ts * 0.001;
-  ctx.clearRect(0,0,w,h);
-  ctx.globalCompositeOperation = 'lighter';
+function step(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
 
-  blobs.forEach((b, i) => {
-    const x = (b.x + Math.sin(t * b.speed + i)*0.03) * w;
-    const y = (b.y + Math.cos(t * b.speed + i)*0.03) * h;
-    const r = b.r * dpr;
+  for(const b of blobs){
+    b.x += b.dx; b.y += b.dy;
+    if(b.x<-200 || b.x>innerWidth+200) b.dx*=-1;
+    if(b.y<-200 || b.y>innerHeight+200) b.dy*=-1;
 
-    const grd = ctx.createRadialGradient(x, y, 0, x, y, r);
-    grd.addColorStop(0, `hsla(${b.hue}, 100%, 60%, ${b.alpha})`);
-    grd.addColorStop(1, 'transparent');
-    ctx.fillStyle = grd;
+    const g = ctx.createRadialGradient(
+      b.x*dpr, b.y*dpr, 0,
+      b.x*dpr, b.y*dpr, b.r*dpr
+    );
+    // whites & greys
+    if(b.c===0){
+      g.addColorStop(0,'rgba(255,255,255,0.16)');
+      g.addColorStop(1,'rgba(255,255,255,0.0)');
+    }else{
+      g.addColorStop(0,'rgba(200,200,210,0.14)');
+      g.addColorStop(1,'rgba(200,200,210,0.0)');
+    }
+    ctx.fillStyle = g;
     ctx.beginPath();
-    ctx.arc(x, y, r, 0, Math.PI*2);
+    ctx.arc(b.x*dpr,b.y*dpr,b.r*dpr,0,Math.PI*2);
     ctx.fill();
-  });
+  }
 
-  ctx.globalCompositeOperation = 'source-over';
-  requestAnimationFrame(frame);
+  requestAnimationFrame(step);
 }
-requestAnimationFrame(frame);
+step();
