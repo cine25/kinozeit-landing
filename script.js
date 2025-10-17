@@ -1,50 +1,45 @@
-// Monochrome soft moving blobs for subtle depth
-const canvas = document.getElementById('bg');
+// Subtle animated corner 'fire' glows using Canvas
+const canvas = document.getElementById('fx-canvas');
 const ctx = canvas.getContext('2d', { alpha: true });
 
-let dpr = window.devicePixelRatio || 1;
+let DPR = 1, W = 0, H = 0;
 function resize(){
-  canvas.width = Math.floor(innerWidth * dpr);
-  canvas.height = Math.floor(innerHeight * dpr);
+  DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+  W = canvas.width  = Math.floor(window.innerWidth  * DPR);
+  H = canvas.height = Math.floor(window.innerHeight * DPR);
+  canvas.style.width  = window.innerWidth + 'px';
+  canvas.style.height = window.innerHeight + 'px';
 }
 resize();
 addEventListener('resize', resize);
 
-const blobs = Array.from({length: 6}).map((_,i)=> ({
-  x: Math.random()*innerWidth,
-  y: Math.random()*innerHeight,
-  r: 160 + Math.random()*200,
-  dx: (Math.random()*.6+.2) * (Math.random()<.5?-1:1),
-  dy: (Math.random()*.6+.2) * (Math.random()<.5?-1:1),
-  c: i%2
-}));
+// flicker helper
+function jitter(seed, t, amp){ return (Math.sin(seed + t*0.002) * 0.5 + 0.5) * amp; }
 
-function step(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  for(const b of blobs){
-    b.x += b.dx; b.y += b.dy;
-    if(b.x<-200 || b.x>innerWidth+200) b.dx*=-1;
-    if(b.y<-200 || b.y>innerHeight+200) b.dy*=-1;
-
-    const g = ctx.createRadialGradient(
-      b.x*dpr, b.y*dpr, 0,
-      b.x*dpr, b.y*dpr, b.r*dpr
-    );
-    // whites & greys
-    if(b.c===0){
-      g.addColorStop(0,'rgba(255,255,255,0.16)');
-      g.addColorStop(1,'rgba(255,255,255,0.0)');
-    }else{
-      g.addColorStop(0,'rgba(200,200,210,0.14)');
-      g.addColorStop(1,'rgba(200,200,210,0.0)');
-    }
-    ctx.fillStyle = g;
-    ctx.beginPath();
-    ctx.arc(b.x*dpr,b.y*dpr,b.r*dpr,0,Math.PI*2);
-    ctx.fill();
-  }
-
-  requestAnimationFrame(step);
+function paintGlow(x, y, baseR, rgb, seed, t){
+  const r2 = baseR * (1.4 + jitter(seed, t, 0.25));
+  const grad = ctx.createRadialGradient(x, y, 0, x, y, r2);
+  grad.addColorStop(0, `rgba(${rgb},0.10)`);
+  grad.addColorStop(0.45,`rgba(${rgb},0.06)`);
+  grad.addColorStop(1, `rgba(${rgb},0.00)`);
+  ctx.globalCompositeOperation = 'screen';
+  ctx.fillStyle = grad;
+  ctx.beginPath(); ctx.arc(x, y, r2, 0, Math.PI*2); ctx.fill();
 }
-step();
+
+function frame(t){
+  ctx.clearRect(0,0,W,H);
+
+  // vignette
+  const vg = ctx.createRadialGradient(W*0.5, H*0.55, Math.min(W,H)*0.2, W*0.5, H*0.65, Math.max(W,H)*0.85);
+  vg.addColorStop(0,'rgba(0,0,0,0.0)');
+  vg.addColorStop(1,'rgba(0,0,0,0.45)');
+  ctx.fillStyle = vg; ctx.fillRect(0,0,W,H);
+
+  // warm glows bottom corners – very subtle "fire" hint
+  paintGlow(90*DPR,  H-70*DPR, 220*DPR, '255,145,70',  11.2, t);
+  paintGlow(W-90*DPR,H-70*DPR, 220*DPR, '255,165,92',  97.8, t);
+
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
