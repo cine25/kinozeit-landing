@@ -1,52 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>KINOZEIT HQ</title>
-  <meta name="description" content="KINOZEIT – zeitloses Streaming-Portal." />
-  <link rel="icon" href="assets/logo.png" />
-  <link rel="preload" as="image" href="assets/logo.png">
+  <title>KINOZEIT</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- BACKDROP: gentle liquid gradients -->
-  <div class="bg-gradient"></div>
-  <canvas id="embers" aria-hidden="true"></canvas>
+  <canvas id="bg"></canvas>
 
-  <!-- TOP BAR (Liquid Glass) -->
-  <header class="glass topbar">
-    <div class="left">
-      <a class="brand" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener">
-        <img src="assets/logo.png" alt="Kinozeit Logo" class="brand-logo" />
-        <span class="brand-text">KINOZEIT</span>
+  <!-- Full-width top nav glass bar -->
+  <header class="topbar glass">
+    <div class="topbar-inner">
+      <a class="brand" href="#">
+        <img src="assets/kinozeit.png" alt="Kinozeit Logo" class="brand-logo" />
+        <span class="brand-title">KINOZEIT</span>
+        <span class="brand-tag">HQ</span>
       </a>
-      <span class="chip glass-engraved">HQ</span>
+      <nav class="nav-links">
+        <a class="chip glass" href="https://plex.kinozeit.org/" target="_blank" rel="noopener">Plex</a>
+        <a class="chip glass" href="https://wunschliste.kinozeit.org/" target="_blank" rel="noopener">Wunschliste</a>
+      </nav>
     </div>
-    <nav class="right">
-      <a class="navlink glass-pill" href="https://plex.kinozeit.org" target="_blank" rel="noopener">Plex</a>
-      <a class="navlink glass-pill" href="https://wunschliste.kinozeit.org" target="_blank" rel="noopener">Wunschliste</a>
-    </nav>
-    <div class="sheen"></div>
   </header>
 
-  <!-- CENTER HERO -->
   <main class="hero">
-    <h1 class="hero-title" aria-label="KINOZEIT">
-      <span class="glass-title">KINOZEIT</span>
-    </h1>
-    <p class="subtle">Zeitlos. Ruhig. Gläsern.</p>
+    <h1 class="logo-type">KINOZEIT</h1>
 
-    <!-- Discord CTA, slightly below the title so it doesn't cut text -->
-    <a class="discord-cta glass-cta" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener" title="Discord beitreten">
-      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.369A19.791 19.791 0 0 0 16.558 3c-.184.331-.393.78-.537 1.136a18.27 18.27 0 0 0-4.042 0A7.02 7.02 0 0 0 11.442 3c-1.33.246-2.61.626-3.76 1.136C4.167 7.346 3.3 10.18 3.6 12.965c1.58 1.186 3.104 1.91 4.636 2.382.372-.516.706-1.066.997-1.645-.547-.204-1.07-.454-1.57-.743.132-.096.262-.197.39-.303 3.03 1.415 6.32 1.415 9.32 0 .128.106.258.207.39.303-.5.289-1.023.539-1.57.743.29.579.625 1.129.997 1.645 1.532-.472 3.056-1.196 4.636-2.382.381-3.572-.648-6.37-2.112-8.596ZM9.681 12.674c-.904 0-1.64-.846-1.64-1.888s.73-1.888 1.64-1.888c.91 0 1.646.846 1.64 1.888 0 1.042-.73 1.888-1.64 1.888Zm4.638 0c-.904 0-1.64-.846-1.64-1.888s.73-1.888 1.64-1.888c.91 0 1.646.846 1.64 1.888 0 1.042-.73 1.888-1.64 1.888Z" fill="currentColor"/></svg>
+    <a class="discord-cta glass" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener" aria-label="Discord beitreten">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.317 4.369A19.791 19.791 0 0 0 16.558 3c-.175.312-.373.73-.512 1.063a18.47 18.47 0 0 0-4.092 0A11.27 11.27 0 0 0 11.442 3 19.736 19.736 0 0 0 7.68 4.369C4.266 9.339 3.376 14.18 3.73 18.958a19.89 19.89 0 0 0 5.995 1.874c.48-.657.906-1.352 1.27-2.078a12.705 12.705 0 0 1-1.998-.764c.168-.124.332-.254.489-.392a14.2 14.2 0 0 0 6.733 0c.157.138.321.268.489.392-.651.303-1.34.55-2.061.735.364.726.79 1.421 1.27 2.078a19.86 19.86 0 0 0 5.995-1.874c.415-5.52-.705-10.319-2.295-14.589zM9.861 15.168c-1.169 0-2.12-1.084-2.12-2.418 0-1.334.93-2.418 2.12-2.418 1.19 0 2.141 1.084 2.12 2.418 0 1.334-.93 2.418-2.12 2.418zm4.278 0c-1.169 0-2.12-1.084-2.12-2.418 0-1.334.93-2.418 2.12-2.418 1.19 0 2.141 1.084 2.12 2.418 0 1.334-.93 2.418-2.12 2.418z"/>
+      </svg>
       <span>Discord</span>
     </a>
+
+    <p class="tagline">ZEITLOS. RUHIG. GLÄSERN.</p>
   </main>
 
-  <!-- BOTTOM BAR -->
-  <footer class="glass bottombar">
-    <div class="footer-center">© 2025 KINOZEIT<span class="thin">HQ</span></div>
+  <!-- Full-width bottom footer glass bar -->
+  <footer class="bottombar glass">
+    <div class="bottombar-inner">
+      <span>© 2025 KINOZEIT HQ</span>
+    </div>
   </footer>
 
   <script src="script.js"></script>
