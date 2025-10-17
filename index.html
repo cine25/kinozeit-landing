@@ -1,51 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KINOZEIT</title>
-  <link rel="preload" href="styles.css" as="style">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href="assets/kinozeit.png" as="image">
   <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <meta name="robots" content="noindex,follow">
 </head>
 <body>
-  <div class="glass-rail top-rail">
-    <a class="logo-glass" href="https://discord.gg/yxJ7N49Gx7" aria-label="Discord">
-      <img src="assets/kinozeit.png" alt="Kinozeit Logo" />
-      <span class="logo-glow"></span>
-    </a>
-    <nav class="nav-actions">
-      <a class="chip" href="https://plex.kinozeit.org">Plex</a>
-      <a class="chip" href="https://wunschliste.kinozeit.org">Overseerr</a>
-    </nav>
+  <div class="stage">
+    <header class="glass-bar top">
+      <a class="logo-card" href="https://discord.gg/yxJ7N49Gx7" aria-label="Discord öffnen">
+        <img src="assets/kinozeit.png" alt="Kinozeit HQ" />
+      </a>
+      <nav class="nav">
+        <a class="chip" href="https://plex.kinozeit.org/">Plex</a>
+        <a class="chip" href="https://wunschliste.kinozeit.org/">Overseerr</a>
+      </nav>
+    </header>
+
+    <main class="hero">
+      <h1>KINOZEIT</h1>
+      <a class="cta" href="https://discord.gg/yxJ7N49Gx7">
+        <span class="ico">🎮</span> Discord beitreten
+      </a>
+      <div class="links">
+        <a class="pill" href="https://plex.kinozeit.org/">Plex Web</a>
+        <a class="pill" href="https://wunschliste.kinozeit.org/">Wunschliste</a>
+      </div>
+    </main>
+
+    <footer class="glass-bar bottom">
+      <div class="copy">© 2025 KINOZEIT HQ</div>
+    </footer>
   </div>
 
-  <div class="blur-bg" aria-hidden="true"></div>
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-
-  <h1 class="title-glass">KINOZEIT</h1>
-
-  <div class="cta">
-    <a class="btn btn-discord" href="https://discord.gg/yxJ7N49Gx7">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
-        <path d="M20.317 4.369A19.791 19.791 0 0 0 16.558 3c-.153.28-.33.658-.453.96a18.27 18.27 0 0 0-4.21 0A8.34 8.34 0 0 0 11.442 3c-1.37.22-2.68.6-3.759 1.116C4.771 6.655 4.07 9.21 4.195 11.724c1.58 1.18 3.112 1.9 4.604 2.372.37-.512.699-1.06.98-1.638-.546-.208-1.067-.465-1.56-.764.131-.098.26-.2.386-.304 3.011 1.41 6.276 1.41 9.247 0 .127.104.256.206.386.304-.492.299-1.013.556-1.559.764.28.58.608 1.127.98 1.64 1.492-.474 3.024-1.194 4.604-2.374.19-3.6-.611-6.126-2.946-8.355zM10.02 11.84c-.9 0-1.633-.8-1.633-1.787 0-.988.727-1.79 1.633-1.79.907 0 1.64.802 1.633 1.79 0 .987-.727 1.788-1.633 1.788zm3.962 0c-.9 0-1.634-.8-1.634-1.787 0-.988.728-1.79 1.634-1.79.905 0 1.632.802 1.632 1.79 0 .987-.727 1.788-1.632 1.788z"/>
-      </svg>
-      Discord beitreten
-    </a>
-    <div class="links">
-      <a class="btn" href="https://plex.kinozeit.org">Plex Web</a>
-      <a class="btn" href="https://wunschliste.kinozeit.org">Wunschliste</a>
-    </div>
-  </div>
-
-  <div class="glass-rail bottom-rail">
-    <div class="progress"><span class="bar"></span></div>
-    <p class="copyright">© 2025 KINOZEIT HQ</p>
-  </div>
-
-  <script defer src="script.js"></script>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <script src="script.js"></script>
 </body>
 </html>
