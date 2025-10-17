@@ -1,53 +1,56 @@
 <!DOCTYPE html>
-<html lang="de" data-theme="system">
+<html lang="de" data-theme="light">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KINOZEIT</title>
+  <meta name="description" content="KINOZEIT HQ — Stream • Speed • Quality">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Top Glass Nav -->
-  <header class="glass-nav">
-    <div class="nav-left">
-      <span class="badge">HQ</span>
-      <a href="#" class="brand" aria-label="Kinozeit Start">KINOZEIT</a>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <!-- Top glass bar -->
+  <header class="glass-bar top" role="banner">
+    <div class="bar-inner">
+      <div class="left">
+        <span class="pill hq" aria-label="Headquarters">HQ</span>
+        <span class="brand">KINOZEIT</span>
+      </div>
+      <nav class="right" aria-label="Navigation">
+        <a class="chip" href="https://plex.kinozeit.org" rel="noopener">Plex</a>
+        <a class="chip" href="https://wunschliste.kinozeit.org" rel="noopener">Wunschliste</a>
+      </nav>
     </div>
-    <nav class="nav-right">
-      <a class="chip" href="https://plex.kinozeit.org" target="_blank" rel="noopener">Plex</a>
-      <a class="chip" href="https://wunschliste.kinozeit.org" target="_blank" rel="noopener">Wunschliste</a>
-    </nav>
   </header>
 
-  <!-- Background decorations -->
-  <canvas id="sparks"></canvas>
-  <div class="radials"></div>
+  <!-- Center hero -->
+  <main class="hero" role="main">
+    <h1 class="logo" aria-label="KINOZEIT">K I N O Z E I T</h1>
 
-  <!-- Central wordmark -->
-  <div class="hero">
-    <h1 class="wordmark" aria-hidden="true">KINOZEIT</h1>
+    <a class="cta glass-button" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener">
+      <img src="assets/discord.svg" alt="" class="icon" width="18" height="18">
+      <span>Unser Discord</span>
+    </a>
 
-    <div class="cta">
-      <a class="glass-btn" href="https://discord.gg/yxJ7N49Gx7" target="_blank" rel="noopener">
-        <span class="ico">🎮</span>
-        <span>Unser Discord</span>
-      </a>
-      <p class="tagline">STREAM • SPEED • QUALITY</p>
-    </div>
-  </div>
+    <p class="tagline" aria-label="Slogan">STREAM &nbsp;•&nbsp; SPEED &nbsp;•&nbsp; QUALITY</p>
+  </main>
 
-  <!-- Footer -->
-  <footer class="glass-footer">
-    <div class="footer-inner">
+  <!-- Bottom glass bar -->
+  <footer class="glass-bar bottom" role="contentinfo">
+    <div class="bar-inner center">
       <span>© 2025 KINOZEITHQ</span>
     </div>
   </footer>
 
   <!-- Theme toggle -->
-  <button class="theme-toggle" id="themeToggle" aria-label="Theme umschalten">
-    <span class="sun">☀️</span><span class="moon">🌙</span>
+  <button id="themeToggle" class="theme-toggle" aria-label="Theme wechseln" title="Theme wechseln">
+    <span class="sun" aria-hidden="true">☀️</span>
+    <span class="moon" aria-hidden="true">🌙</span>
   </button>
 
   <script src="script.js"></script>

@@ -1,67 +1,62 @@
-// Theme handling: system by default. Toggle persists in localStorage.
+
+// Theme handling
 (function(){
   const root = document.documentElement;
   const saved = localStorage.getItem('kinozeit-theme');
-  const isSysDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  const apply = (mode) => {
-    root.classList.remove('light');
-    if(mode === 'light') root.classList.add('light');
-  };
-
-  apply(saved ? saved : (isSysDark ? '' : 'light'));
-
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    const nowLight = !root.classList.contains('light');
-    if(nowLight){ root.classList.add('light'); localStorage.setItem('kinozeit-theme','light'); }
-    else { root.classList.remove('light'); localStorage.setItem('kinozeit-theme','dark'); }
+  if(saved){ root.setAttribute('data-theme', saved); }
+  else {
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  }
+  document.getElementById('themeToggle').addEventListener('click', ()=>{
+    const cur = root.getAttribute('data-theme');
+    const next = (cur === 'dark') ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('kinozeit-theme', next);
   });
 })();
 
-// Soft particles
+// Floating dust particles
 (function(){
-  const c = document.getElementById('sparks');
+  const c = document.getElementById('fx');
   const ctx = c.getContext('2d');
-  let w,h; const DPR = Math.min(2, window.devicePixelRatio||1);
+  let w, h, dpr;
+  let particles = [];
 
-  const resize = () => {
-    w = c.width = Math.floor(innerWidth * DPR);
-    h = c.height = Math.floor(innerHeight * DPR);
-    c.style.width = innerWidth+'px';
-    c.style.height = innerHeight+'px';
+  const reset = ()=>{
+    dpr = window.devicePixelRatio || 1;
+    w = c.width = innerWidth * dpr;
+    h = c.height = innerHeight * dpr;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    particles = new Array(80).fill(0).map(_=> ({
+      x: Math.random()*w, y: Math.random()*h,
+      r: (Math.random()*1.2 + 0.6) * dpr,
+      a: Math.random()*Math.PI*2,
+      s: Math.random()*0.4 + 0.1
+    }));
   };
-  resize(); addEventListener('resize', resize);
+  reset();
+  window.addEventListener('resize', reset, {passive:true});
 
-  const N = 36;
-  const P = [...Array(N)].map(()=> ({
-    x: Math.random()*w, y: Math.random()*h,
-    r: (Math.random()*16+10)*DPR,
-    a: Math.random()*Math.PI*2,
-    v: (Math.random()*0.4+0.15)*DPR
-  }));
-
-  function tick(t){
+  function tick(){
     ctx.clearRect(0,0,w,h);
-    for(const p of P){
-      p.a += 0.003;
-      p.x += Math.cos(p.a)*p.v;
-      p.y += Math.sin(p.a)*p.v * 0.6;
-      if(p.x<-50 || p.x>w+50) p.x = (p.x+w+50)% (w+100);
-      if(p.y<-50 || p.y>h+50) p.y = (p.y+h+50)% (h+100);
-
-      const grd = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
-      const isLight = document.documentElement.classList.contains('light');
-      if(isLight){
-        grd.addColorStop(0,'rgba(255,255,255,.28)');
-        grd.addColorStop(1,'rgba(255,255,255,0)');
-      }else{
-        grd.addColorStop(0,'rgba(255,255,255,.12)');
-        grd.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.globalCompositeOperation = 'lighter';
+    const theme = document.documentElement.getAttribute('data-theme') || 'light';
+    const col = theme === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+    ctx.fillStyle = col;
+    particles.forEach(p=>{
+      p.x += Math.cos(p.a)*p.s;
+      p.y += Math.sin(p.a)*p.s*0.8;
+      p.a += 0.002;
+      if(p.x < -50 || p.x > w+50 || p.y < -50 || p.y > h+50){
+        p.x = Math.random()*w; p.y = Math.random()*h;
       }
-      ctx.fillStyle = grd;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-    }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fill();
+    });
     requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
+  tick();
 })();
