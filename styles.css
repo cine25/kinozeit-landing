@@ -93,10 +93,11 @@ body {
 .logo-wrap{
   position: absolute;
   top: 50%; left: 50%;
-  transform: translate(-50%, -50%); scale(1.5);
+  transform: translate(-50%, -50%) scale(1.5); /* <- hier! */
+  transform-origin: center;
   display: grid; place-items:center;
   user-select:none;
-  pointer-events: none; /* no text selection */
+  pointer-events: none;
 }
 .logo-svg{
   width: min(70vw, 980px);
